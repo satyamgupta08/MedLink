@@ -4,8 +4,8 @@ import img from "../utils/img/aboutus.jpg"
 
 const AboutUs=()=>{
     return(  
-    <div className="container">
-    <div className="heading">
+    <div className="about-container">
+    <div className="about-heading">
         <h1>ABOUT US</h1>
         <p>The project aims to create a user-friendly app and
             website tailored for hospital usage.
@@ -39,7 +39,6 @@ const AboutUs=()=>{
                     </ul>
                 </div>
             </div>
-            {/* <a href="" className="read-more">Read More</a> */}
         </div>
     </div>
     </div>

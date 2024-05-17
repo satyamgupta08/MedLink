@@ -6,7 +6,7 @@ const BedsAvailability = () => {
   const [selectedCity, setSelectedCity] = useState('');
 
   const cityData = {
-    Uttar_Pradesh: ['Lucknow', 'Kanpur', 'Prayagraj', 'Agra', 'Varanasi', 'Ghaziabad', 'Jhansi', 'Unnao', 'vrindavan'],
+    Uttar_Pradesh: ['Lucknow', 'Kanpur', 'Prayagraj', 'Agra', 'Varanasi', 'Ghaziabad', 'Jhansi', 'Unnao', 'Vrindavan'],
     Madhya_Pradesh: ['Sagar', 'Bhopal', 'Beena', 'Ujjain', 'Jabalpur', 'Indore', 'Damoh'],
     Bihar: ['Patna', 'Muzaffarnagar', 'Madhubani', 'Banka', 'Darbhanga'],
     Maharastra: ['Mumbai', 'Pune', 'Nagpur', 'Akola', 'Amarvati', 'Washim'],
@@ -14,7 +14,7 @@ const BedsAvailability = () => {
     Rajasthan: ['Kota', 'Jaipur', 'Jodhpur', 'Udaipur', 'Bikaner', 'Alwar'],
     Chattisgarh: ['Raipur', 'Bilaspur', 'Raigarh', 'Jashpur', 'Pratappur'],
     Uttrakhand: ['Almora', 'Dehradun', 'Nainital', 'Rishikesh', 'Kashipur'],
-    Punjab: ['Amritsar', 'Jalandhar', 'Lundhiana', 'Patiala', 'Moga', 'Bhatinda'],
+    Punjab: ['Amritsar', 'Jalandhar', 'Ludhiana', 'Patiala', 'Moga', 'Bhatinda'],
     Himachal_Pradesh: ['Chamba', 'Manali', 'Rampur', 'Rajgarh', 'Mandi', 'Una']
   };
 
@@ -30,31 +30,45 @@ const BedsAvailability = () => {
   };
 
   const handleSubmit = () => {
+    // Add logic to handle form submission here
   };
 
   return (
-    <div className="container" style={{ display: 'flex', flexDirection: 'column' }}>
-      <label htmlFor="states">States:</label>
-      <select id="states" onChange={handleStateChange} style={{ padding: '5px' }}>
-        <option value="" disabled selected>Select States</option>
-        {Object.keys(cityData).map(state => (
-          <option key={state} value={state}>{state}</option>
-        ))}
-      </select>
+    <div className="container mx-auto px-4 py-8">
+      <h2 className="text-3xl font-semibold text-center mb-6">Check Beds Availability</h2>
+      <div className="bg-white rounded-lg shadow-lg p-6">
+        <div className="mb-4">
+          <label htmlFor="states" className="block text-lg text-gray-800 mb-2">Select State:</label>
+          <select id="states" onChange={handleStateChange} className="border border-gray-300 rounded p-2 pl-10 w-full">
+            <option value="" disabled selected>Select State</option>
+            {Object.keys(cityData).map(state => (
+              <option key={state} value={state}>{state}</option>
+            ))}
+          </select>
+        </div>
 
-      <label htmlFor="city" style={{ marginTop: '20px' }}>Cities:</label>
-      <select id="city" onChange={handleCityChange} style={{ padding: '5px' }}>
-        {selectedState && cityData[selectedState] && cityData[selectedState].map(city => (
-          <option key={city} value={city}>{city}</option>
-        ))}
-      </select>
+        {selectedState && (
+          <div className="mb-4">
+            <label htmlFor="city" className="block text-lg text-gray-800 mb-2">Select City:</label>
+            <select id="city" onChange={handleCityChange} className="border border-gray-300 rounded p-2 pl-10 w-full">
+              {cityData[selectedState].map(city => (
+                <option key={city} value={city}>{city}</option>
+              ))}
+            </select>
+          </div>
+        )}
 
-      <div style={{ padding: '10px auto' }}>
-      <Link to={`/hospital/beds/${selectedCity}`}>
-        <button className="btn btn-primary btn-md" style={{ padding: '8px 15px', margin: '25px 190px', color: 'white', textDecoration: 'none' }} onClick={handleSubmit}>
-          Submit
-      </button>
-      </Link>
+        <div className="text-center">
+          <Link to={`/hospital/beds/${selectedCity}`}>
+            <button 
+              className={`bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded transition duration-300 ${!selectedCity && 'opacity-50 cursor-not-allowed'}`}
+              onClick={handleSubmit}
+              disabled={!selectedCity}
+            >
+              Check Availability
+            </button>
+          </Link>
+        </div>
       </div>
     </div>
   );
